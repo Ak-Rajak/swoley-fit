@@ -10,6 +10,7 @@ export default function SectionWrapper(props) {
             {title[0]}<span className='uppercase text-blue-400'>{title[1]}</span>{title[2]}
         </h2>
        </div>
+       <div>{children}</div>
     </section>
   )
 }
