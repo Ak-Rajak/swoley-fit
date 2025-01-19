@@ -27,13 +27,41 @@ export default function Generator() {
     setShowModel(!showModel);
   }
 
+  function updateMuscles(muscleGroup) {
+    // here is the problem , filter is not working as expected
+    if (muscles.includes(muscleGroup)) {
+      setMuscles(muscles.filter(val => val !== muscleGroup))
+      return
+    }
+
+    if (muscles.length > 2){
+      return
+    }
+
+    if (poison !== 'individual') {
+      setMuscles([muscleGroup])
+      return
+    }
+
+    if (muscles.includes(muscleGroup)) {
+      setMuscles(muscles.filter(val => val !== muscleGroup))
+      return
+    }
+
+    setMuscles([...muscles, muscleGroup])
+  }
+
+
+
   return (
     <SectionWrapper header={"generate your workout"} title={['It\'s' , 'Huge','o\'clock']}>
       <Header index={'01'} title={'Pick Your Poison'} description={'Select your workout you wish to endure.'}/>
       <div className='grid grid-cols-2 sm:grid-cols-4 gap-5'>
       {Object.keys(WORKOUTS).map((type, typeIndex) => {
         return (
-          <button key={typeIndex} className='bg-slate-950 border border-blue-400 duration-200 hover:border-blue-600 py-3 rounded-lg'>
+          <button onClick={() => {
+            setPoison(type)
+          }} className={'bg-slate-950 border duration-200 hover:border-blue-600 py-3 rounded-lg ' + (type == poison ? 'border-blue-600' : 'border-blue-400')} key={typeIndex} >
             <p className='capitalize'>{type.replaceAll('_'," ")}</p>
           </button>
         )
@@ -42,21 +70,31 @@ export default function Generator() {
       <Header index={'02'} title={'Lock on Targets'} description={'Select the muscles judged for annihilation.'}/>
       <div className='bg-slate-950 border border-solid border-blue-400 rounded-lg flex flex-col'>
         <button onClick={() => {
-           setPoison(type)
+          toggleModel()
         }} className='relative p-3 flex items-center justify-center'>
           <p>Select muscle groups</p>
           <i className="fa-solid absolute right-3
           top-1/2 -translate-y-1/2 fa-caret-down"></i>
         </button>
         {showModel && (
-        <div>showModal</div>
+        <div className='flex flex-col p-3'>
+          {(poison ==='individual' ? WORKOUTS[poison] : Object.keys(WORKOUTS[poison])).map((muscleGroup, muscleGroupIndex) => {
+            return (
+              <button onClick={() => updateMuscles(muscleGroup)}key={muscleGroupIndex} className={'hover:text-blue-400 duration-200' + (muscles.includes(muscleGroup) ? 'text-blue-400' : '')}>
+                <p className='uppercase'>{muscleGroup.replaceAll('_'," ")}</p>
+              </button>
+            )
+          })}
+        </div>
         )}
       </div>
       <Header index={'03'} title={'Become Jugernaut'} description={'Select your ultimate objective.'}/>
       <div className='grid grid-cols-3 gap-5'>
       {Object.keys(SCHEMES).map((scheme, schemeIndex) => {
         return (
-          <button key={schemeIndex} className='bg-slate-950 border border-blue-400 duration-200 hover:border-blue-600 py-3 rounded-lg'>
+          <button onClick={() => {
+            setGoals(scheme)
+          }} className={'bg-slate-950 border duration-200 hover:border-blue-600 py-3 rounded-lg ' + (scheme == goals ? 'border-blue-600' : 'border-blue-400')} key={schemeIndex} >
             <p className='capitalize'>{scheme.replaceAll('_'," ")}</p>
           </button>
         )
