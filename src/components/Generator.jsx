@@ -17,11 +17,9 @@ function Header(props) {
 }
 
 
-export default function Generator() {
+export default function Generator(props) {
   const [showModel,setShowModel] = useState(false);
-  const [poison,setPoison] = useState('individual');
-  const [muscles,setMuscles] = useState([])
-  const [goals, setGoals] = useState('strength_power');
+  const {poison, setPoison, muscles, setMuscles, goals, setGoals , updateWorkout} = props;
   // let showModel = false;
 
   function toggleModel() {
@@ -90,7 +88,7 @@ export default function Generator() {
         )}
       </div>
       <Header index={'03'} title={'Become Jugernaut'} description={'Select your ultimate objective.'}/>
-      <div className='grid grid-cols-3 gap-5'>
+      <div className='grid grid-cols-1 sm:grid-cols-3 gap-5'>
       {Object.keys(SCHEMES).map((scheme, schemeIndex) => {
         return (
           <button onClick={() => {
@@ -101,7 +99,7 @@ export default function Generator() {
         )
       })}
       </div>
-      <Buttons text={'Evaluate'}/>
+      <Buttons func={updateWorkout} text={'Formulate'}/>
     </SectionWrapper>
   )
 }
