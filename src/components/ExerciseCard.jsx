@@ -15,6 +15,10 @@ export default function ExerciseCard(props) {
                 {exercise.type}
             </p>
         </div>
+        <div className="flex flex-col">
+            <h3 className="text-slate-400 text-sm">Muscles Groups</h3>
+            <p className="capitalize">{exercise.muscles.join(' & ')}</p>
+        </div>
         
     </div>
   )
