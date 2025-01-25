@@ -20,7 +20,17 @@ export default function ExerciseCard(props) {
       </div>
       <div className="flex flex-col">
         <h3 className="text-slate-400 text-sm">Muscles Groups</h3>
-        <p className="capitalize">{exercise.muscles.join(" & ")}</p>
+        <p className="capitalize">{exercise.muscles.join(' & ')}</p>
+      </div>
+
+      <div className="flex flex-col bg-slate-950 rounded gap-2">
+        {exercise.description.split('___').map((val) => {
+          return (
+            <div className="text-sm">
+              {val}
+            </div>
+          )
+        })}
       </div>
 
       <div className="grid grid-cols-2 sm:place-items-center gap-2">
@@ -34,7 +44,7 @@ export default function ExerciseCard(props) {
             )
         })}
         <button onClick={handleSetIncrement}className="flex flex-col p-2 rounded border-[1.5px] duration-200 border-solid border-blue-900 hover:border-blue-600 w-full duration-200">
-            <h3 className="text-slate-400 text-sm capitalize">Sets</h3>
+            <h3 className="text-slate-400 text-sm capitalize">Sets Completed</h3>
             <p className="font-medium">{setCompleted}/ 5</p>
         </button>
       </div>
