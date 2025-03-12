@@ -64,6 +64,7 @@ To lint the code, run:
    yarn lint
 ```
 ### 📁 Project Structure
+```
 swoley-fit/
 │── src/             # Contains the source code for the application
 │   ├── components/  # Reusable React components
@@ -74,7 +75,7 @@ swoley-fit/
 │── main.jsx         # Entry point for the application
 │── package.json     # Project dependencies and scripts
 │── README.md        # Project documentation
-
+```
 
 ### 📜 License
 This project is licensed under the MIT License. See the LICENSE file for details.
